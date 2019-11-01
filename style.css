@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+}
+
+.topnav {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    height: 50px;
+    padding: 40px;
+    box-shadow: 2px 2px 20px 10px hotpink inset;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ToDo {
+    margin: 0;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: cursive;
+    text-decoration-line: underline;
+    color: greenyellow;
+    cursor: pointer;
+    width: 100px;
+}
+
+.contact {
+    margin: 0;
+    color: hotpink;
+    cursor: pointer;
+    width: 100px;
+}
+
+.logIn {
+    margin: 0;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: cursive;
+    text-decoration-line: underline;
+    color: greenyellow;
+}
+
+.contact-page {
+    background-color: black;
+    color: white;
+    margin-left: 30px;
+}
+
+.back {
+    color: white;
+    margin-left: 30px;
+}
