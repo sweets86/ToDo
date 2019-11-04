@@ -1,3 +1,8 @@
+
+
+
+
+
 var loggedInUser = undefined
 
 var username = "Yanica"
@@ -12,7 +17,6 @@ function validateForm() {
     if (usernameInput == username && passwordInput == password) {
         loggedInUser = usernameInput
         printList()
-        logOut()
         printAuthentication()
     } else {
         var main = document.getElementById("main")
@@ -24,22 +28,24 @@ function validateForm() {
         main.appendChild(link)
     }
 }
-    logOut()
+
+logOut()
 
 function logOut() {
-    document.getElementsByClassName("button")
+    loggedInUser = undefined
+    printList()
+    printAuthentication()
 }
 
 function printAuthentication() {
     var aContainer = document.getElementById("authentication")
+    aContainer.innerHTML = ""
     if (loggedInUser) {
         var logOutButton = document.createElement("button")
-        logOutButton.classList = ("button")
+        logOutButton.classList = ("logOutButton")
         logOutButton.innerText = "Logga Ut"
-        logOutButton.href = "/index.html"
         aContainer.appendChild(logOutButton)
         logOutButton.onclick = function () {
-            
             logOut()
         }
     } else {
@@ -48,10 +54,16 @@ function printAuthentication() {
         logIn.innerText = "Login:"
         aContainer.appendChild(logIn)
 
-        var inputUser = document.getElementById("username")
+        var inputUser = document.createElement("input")
+        inputUser.id = "username"
+        inputUser.type = "text"
+        inputUser.placeholder = "username"
         aContainer.appendChild(inputUser)
 
-        var inputPass = document.getElementById("password")
+        var inputPass = document.createElement("input")
+        inputPass.id = "password"
+        inputPass.type = "password"
+        inputPass.placeholder = "password"
         aContainer.appendChild(inputPass)
 
         var logInButton = document.createElement("button")
@@ -65,46 +77,45 @@ function printAuthentication() {
     }
 }
 
-/* var logOut = document.createElement("button")
-var topNav = document.getElementsByClassName("topNav")
-logOut.classList = ("button") */
-
-/* logOut.onclick = function () {
-    document.getElementsByTagName("div")[0].innerHTML = ""
-    topNav.appendChild(logOut)
-    console.log(logOut)
-} */
-
-
 function printList() {
     var main = document.getElementById("main")
+    main.innerHTML = ""
+    if (loggedInUser) {
+        main.innerText = username + " " + password
 
-    main.innerText = username + " " + password
+        var container = document.createElement("div")
+        container.classList = "container"
 
-    var container = document.createElement("div")
-    container.classList = "container"
+        var title = document.createElement("p")
+        title.innerText = ("ToDo")
 
-    var title = document.createElement("p")
-    title.innerText = ("ToDo")
+        var toDoList = document.createElement("ol")
+        toDoList.classList = ("ol")
 
-    var toDoList = document.createElement("ol")
-    toDoList.classList = ("ol")
+        var stuffToDo = ["Plugga", "Träna", "Familj", "Jobba", "Fritid"]
+        var json_str = JSON.stringify(stuffToDo);
+        localStorage.toDoList = json_str;
 
-    var stuffToDo = ["Plugga","Träna","Familj","Jobba","Fritid"]
+        for (var i = 0; i < stuffToDo.length; i++) {
+            var selectedToDo = stuffToDo[i]
 
-    for (var i = 0; i < stuffToDo.length; i++) {
-        var selectedToDo = stuffToDo[i]
+            listItem = document.createElement("li")
+            listItem.classList = ("li")
+            listItem.innerText = selectedToDo
 
-        listItem = document.createElement("li")
-        listItem.classList = ("li")
-        listItem.innerText = selectedToDo
+            toDoList.appendChild(listItem)
+            selectedToDo = JSON.parse(localStorage.toDoList);	
+        }
 
-        toDoList.appendChild(listItem)
+        container.appendChild(title)
+        container.appendChild(toDoList)
+        main.appendChild(container)
+
+    } else {
+        var welcome = document.getElementById("main")
+        welcome.innerText = "Hej och Välkommen!"
     }
 
-    container.appendChild(title)
-    container.appendChild(toDoList)
-    main.appendChild(container)
 }
 
 
