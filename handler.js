@@ -182,3 +182,7 @@ function newTodoList() {
     console.log(newTODOFormInput)
     printNewTodoItem()
 }
+
+var currentDate = new Date
+var time = document.getElementById("time")
+time.innerText = currentDate.toLocaleString()
