@@ -85,6 +85,7 @@ function printList() {
         container.classList = "container"
 
         var title = document.createElement("p")
+        title.classList = "title"
         title.innerText = ("ToDo")
 
         var toDoList = document.createElement("ol")
