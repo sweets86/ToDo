@@ -80,14 +80,14 @@ function printList() {
     todoListContainer.innerHTML = ""
     if (localStorage.getItem("loggedInUser")) {
         todoListContainer.innerText = username + " " + password
-
+        
         var container = document.createElement("div")
         container.classList = "container"
 
         var title = document.createElement("p")
         title.classList = "title"
         title.innerText = ("ToDo")
-
+        
         var toDoList = document.createElement("ol")
         toDoList.classList = ("ol")
 
@@ -112,21 +112,22 @@ function printList() {
 
             listItem.appendChild(removeButton)
 
+
             removeButton.onclick = function () {
                 stuffToDo.splice(this.data, 1)
                 localStorage.setItem("todoList", JSON.stringify(stuffToDo))
                 printList()
-
-                /* for (var i = 0; i < stuffToDo.length; i++) {
-                    if (this.data == stuffToDo[i]) {
-                        stuffToDo.splice(i, 1)
-                        console.log(stuffToDo)
-                        localStorage.setItem("todoList", JSON.stringify(stuffToDo))
-                        printList()
-                        return
-                    }
-                } */
             }
+            /* for (var i = 0; i < stuffToDo.length; i++) {
+                if (this.data == stuffToDo[i]) {
+                    stuffToDo.splice(i, 1)
+                    console.log(stuffToDo)
+                    localStorage.setItem("todoList", JSON.stringify(stuffToDo))
+                    printList()
+                    return
+                }
+            } */
+
 
             container.appendChild(title)
             container.appendChild(toDoList)
@@ -156,7 +157,6 @@ function printNewTodoItem() {
         inputButton.innerText = "Submit"
         addNewContainer.appendChild(inputButton)
 
-
         inputButton.onclick = function () {
             newTodoList()
         }
@@ -170,18 +170,22 @@ function printNewTodoItem() {
 
 function newTodoList() {
     var newTODOFormInput = document.getElementById("addItem").value
-    var listTodo = JSON.parse(localStorage.getItem("todoList"))
 
-    if (!listTodo) {
-        listTodo = []
+    if (newTODOFormInput.length) {
+        var listTodo = JSON.parse(localStorage.getItem("todoList"))
+
+        if (!listTodo) {
+            listTodo = []
+        }
+
+        listTodo.push(newTODOFormInput)
+        localStorage.setItem("todoList", JSON.stringify(listTodo))
+
+        printList()
+        printNewTodoItem()
+    } else {
+        alert("Write something to do! =)")
     }
-
-    listTodo.push(newTODOFormInput)
-    localStorage.setItem("todoList", JSON.stringify(listTodo))
-
-    printList()
-    console.log(newTODOFormInput)
-    printNewTodoItem()
 }
 
 var currentDate = new Date
